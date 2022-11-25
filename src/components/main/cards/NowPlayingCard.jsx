@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,14 +6,13 @@ import MovieCard from "../styleCard/MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css/navigation";
+import { mench } from "../../services/mench";
 
 export default function NowPlayingCard() {
   const [card, setCard] = useState([]);
 
   async function nowPlayingCard() {
-    const { data } = await axios.get(
-      `${baseUrl}/movie/now_playing?api_key=${apiKey}`
-    );
+    const { data } = await mench.get(`movie/now_playing`);
     setCard(data.results);
     console.log(card);
   }

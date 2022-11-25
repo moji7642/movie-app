@@ -7,6 +7,7 @@ import About from "./components/pages/About";
 import Login from "./components/pages/Login";
 import Movie from "./components/pages/Movie";
 import TrailerMovie from "./components/pages/TrailerMovie";
+import Profile from "./components/pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/login/",
         element: <Login />,
+      },
+      {
+        path: "/profile/",
+        element: <Profile />,
       },
     ],
   },

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -7,14 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import MovieCard from "../styleCard/MovieCard";
+import { mench } from "../../services/mench";
 
 export default function TopRateCard() {
   const [card, setCard] = useState([]);
 
   async function apiCard() {
-    const { data } = await axios.get(
-      `${baseUrl}/movie/top_rated?api_key=${apiKey}`
-    );
+    const { data } = await mench.get(`movie/top_rated`);
     setCard(data.results);
   }
   useEffect(() => {

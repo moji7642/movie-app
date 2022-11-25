@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,11 +6,12 @@ import MovieCard from "../styleCard/MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css/navigation";
+import { mench } from "../../services/mench";
 
 export default function FreeToWatch() {
   const [card, setCard] = useState([]);
   async function freeToWatch() {
-    const { data } = await axios.get(`${baseUrl}/movie/popular?api_key=${apiKey}`);
+    const { data } = await mench.get(`movie/popular`);
     setCard(data.results);
   }
   useEffect(() => {
@@ -53,9 +53,7 @@ export default function FreeToWatch() {
         {card.map((movie) => {
           return (
             <SwiperSlide key={movie.id}>
-              <MovieCard
-                movie={movie}
-              />
+              <MovieCard movie={movie} />
             </SwiperSlide>
           );
         })}

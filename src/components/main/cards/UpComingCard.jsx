@@ -1,19 +1,17 @@
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { apiKey, baseUrl, baseUrlImage } from "../../../api";
+import { baseUrlImage } from "../../../api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import { Link } from "react-router-dom";
+import { mench } from "../../services/mench";
 
 export default function UpComingCard() {
   const [bg, setBg] = useState("../../../images/home1.jpg");
   const [card, setCard] = useState([]);
   async function apiCard() {
-    const { data } = await axios.get(
-      `${baseUrl}/movie/upcoming?api_key=${apiKey}`
-    );
+    const { data } = await mench.get(`movie/upcoming`);
     setCard(data.results);
   }
   useEffect(() => {
@@ -49,23 +47,23 @@ export default function UpComingCard() {
           className="mySwiper"
         >
           {card.map((movie) => {
-            function getImage (id) {
-              return `${baseUrlImage}/w1280/${movie.backdrop_path}`
+            function getImage(id) {
+              return `${baseUrlImage}/w1280/${movie.backdrop_path}`;
             }
             return (
               <SwiperSlide key={movie.id}>
                 <Link to={`/movies/${movie.id}`}>
-                <img
-                  onMouseOver={(e) => setBg(getImage(movie.id))}
-                  src={getImage(movie.id)}
-                  className="object-cover w-full h-full rounded mt-2"
-                  alt="test"
-                />
+                  <img
+                    onMouseOver={(e) => setBg(getImage(movie.id))}
+                    src={getImage(movie.id)}
+                    className="object-cover w-full h-full rounded mt-2"
+                    alt="test"
+                  />
 
-                <div className="flex flex-col justify-center items-center mt-4  w-full h-full ">
-                  <h3>{movie.title}</h3>
-                  <h3>{movie.release_date}</h3>
-                </div>
+                  <div className="flex flex-col justify-center items-center mt-4  w-full h-full ">
+                    <h3>{movie.title}</h3>
+                    <h3>{movie.release_date}</h3>
+                  </div>
                 </Link>
               </SwiperSlide>
             );

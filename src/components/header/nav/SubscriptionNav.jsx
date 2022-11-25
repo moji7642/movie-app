@@ -2,9 +2,23 @@ import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
+import toast from "react-hot-toast";
+
+// import { ConfirmDialog } from "primereact/confirmdialog"; // To use <ConfirmDialog> tag
+// import { confirmDialog } from "primereact/confirmdialog"; // To use confirmDialog method
 
 export default function SubscriptionNav() {
+  // const [visible, setVisible] = useState(boolean(false));
   const { user, handleLogout } = useContext(UserContext);
+  // const confirm = () => {
+  //   confirmDialog({
+  //     message: "Are you sure you want to proceed?",
+  //     header: "Confirmation",
+  //     icon: "pi pi-exclamation-triangle",
+  //     accept: () => acceptFunc(),
+  //     reject: () => rejectFunc(),
+  //   });
+  // };
 
   return (
     <>
@@ -17,6 +31,22 @@ export default function SubscriptionNav() {
           >
             Logout!
           </button>
+
+          {/* <ConfirmDialog
+            visible={visible}
+            onHide={() => setVisible(false)}
+            message="Are you sure you want to proceed?"
+            header="Confirmation"
+            icon="pi pi-exclamation-triangle"
+            accept={accept}
+            reject={reject}
+          />
+
+          <Button
+            onClick={() => setVisible(true)}
+            icon="pi pi-check"
+            label="Confirm"
+          /> */}
         </>
       ) : (
         <Link to={"/login/"}>

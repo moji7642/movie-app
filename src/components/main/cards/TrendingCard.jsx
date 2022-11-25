@@ -1,25 +1,22 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { apiKey, baseUrl } from "../../../api";
 import MovieCard from "../styleCard/MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css/navigation";
+import { mench } from "../../services/mench";
 
 export default function TrendingCard() {
   const [card, setCard] = useState([]);
 
   async function nowPlayingCard() {
-    const { data } = await axios.get(
-      `${baseUrl}/trending/all/week?api_key=${apiKey}`
-    );
+    const { data } = await mench.get(`trending/all/week`);
     setCard(data.results);
   }
-  useEffect(()=>{
+  useEffect(() => {
     nowPlayingCard();
-  },[])
+  }, []);
 
   return (
     <div className="py-4 px-6">
@@ -57,9 +54,7 @@ export default function TrendingCard() {
         {card.map((movie) => {
           return (
             <SwiperSlide key={movie.id}>
-              <MovieCard
-                movie={movie}
-              />
+              <MovieCard movie={movie} />
             </SwiperSlide>
           );
         })}
@@ -67,4 +62,4 @@ export default function TrendingCard() {
     </div>
   );
 }
-// title, poster_path, vote_average,id 
+// title, poster_path, vote_average,id
